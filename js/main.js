@@ -1,8 +1,8 @@
-import { initializeApp } from https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js
-import { getDatabase, ref, push, onValue, remove } from https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const appSettings = {
-  databaseURL: https://bailey-s-bites-default-rtdb.firebaseio.com/
+  databaseURL: "https://play-ground-ce58e-default-rtdb.firebaseio.com/"
 }
 
 const app = initializeApp(appSettings)
@@ -14,24 +14,27 @@ const addButtonEl = document.getElementById("add-button")
 const movieListEl = document.getElementById("movie-list")
 
 onValue(moviesInDB, function(snapshot) {
-  let moviesArray = Object.entries(snapshot.val())
-  
-   moviesArray.reverse()
-  
-  clearMovieListEl()
-  
-  for (let i = 0; i < moviesArray.length; i++) {
-    let currentMovie = moviesArray[i]   
-    let currentMovieID = currentMovie[0]
-    let currentMovieValue = currentMovie[1]
-    
-    appendMovieListEl(currentMovie)
-  }
 
-})
+  if (snapshot.exists()) {
+    let moviesArray = Object.entries(snapshot.val())
+    moviesArray.reverse()
+    clearMovieListEl()
+    
+    for (let i = 0; i < moviesArray.length; i++) {
+      let currentMovie = moviesArray[i]   
+      let currentMovieID = currentMovie[0]
+      let currentMovieValue = currentMovie[1]
+      
+      appendMovieListEl(currentMovie)
+    }
+    
+  } else {
+    movieListEl.innerHTML = "No items here... yet"
+  }
+})  
 
 addButtonEl.addEventListener("click", function() {
-    let inputValue = inputFieldEl.value
+    let inputValue = inputFieldEl.value    
     clearMovieListEl()
     push(moviesInDB, inputValue)
     clearInput()
@@ -46,13 +49,12 @@ function clearMovieListEl() {
 }
 
 function appendMovieListEl(movie) {
-   /* movieListEl.innerHTML += ` <li>${listItem}</li>` */
    
    let movieID = movie[0]
    let movieValue = movie[1]
    
    let newEl = document.createElement("li")
-   
+      
    newEl.textContent = movieValue
    
    newEl.addEventListener("click", function() {

@@ -1,3 +1,15 @@
+:root {
+   --background-color: #cfbdec;
+   --accent-color: #742ff6;
+   --dark-color: #252525;
+   --light-color: #fff;
+   --secondary-accent-color: #E4B6AB;
+
+   --second-background-color: #C5EDE2;
+   --second-accent-color: #307A69;
+   --second-dark-color: #3B423D;
+   --second-light-color: #FCFDFD;
+}
 * {
     padding: 0;
     margin: 0;
@@ -6,7 +18,9 @@
   
   body {
      font-family: 'Rubik', sans-serif;
-     background-color: #EEF0F4;
+     background-color: var(--second-background-color);
+     color: var(--second-dark-color);
+     user-select: none;
   }
   
   .container {
@@ -27,24 +41,53 @@
   }
   
   input {
-      color: #432000;
-      background-color: #DCE1EB;
+      color: var(--second-dark-color);
+      background-color: var(--second-light-color);
       width: 100%;
       border: 0;
       padding: 15px;
       border-radius: 8px;
       font-size: 20px;
       text-align: center;
-      font-family: 'Rubik', sans-serif;
+      font-family: 'Josefin Sans', sans-serif;
   }
   
   button {
-      color: #FDFDFD;
-      background-color: #AC485A;
+      color: var(--light-color);
+      background-color: var(--dark-color);
       width: 100%;
       border: 0;
       padding: 15px;
       border-radius: 8px;
       font-size: 20px;
   }
+
+  button:hover { opacity: 0.7; }
   
+  ul {   
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+ }
+ 
+ ul li {
+    font-size: 20px;
+    background-color: var(--second-accent-color);
+    color: var(--second-light-color);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px 15px; 
+    width: fit-content;
+    border-radius: 8px;
+    text-align: center;
+    flex-grow: 1;
+ }
+
+ ul li:hover {
+    background: var(--second-light-color);
+    color: var(--second-accent-color);
+    cursor: pointer;
+ }
